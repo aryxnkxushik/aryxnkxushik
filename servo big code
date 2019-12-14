@@ -1,0 +1,229 @@
+#include <ESP8266WiFi.h>
+#include <Servo.h>
+Servo servo;
+ 
+const char* ssid = "OneTapNet";
+const char* password = "vitsucks";  
+
+WiFiServer server(80);
+ 
+void setup() {
+  Serial.begin(115200);
+  delay(10);
+  servo.attach(2); //Gpio-2 of nodemcu with pwm pin of servo motor
+  // Connect to WiFi network
+  Serial.println();
+  Serial.println();
+  Serial.print("Connecting to ");
+  Serial.println(ssid);
+ 
+  WiFi.begin(ssid, password);
+ 
+  while (WiFi.status() != WL_CONNECTED) {
+    delay(500);
+    Serial.print(".");
+  }
+  Serial.println("");
+  Serial.println("WiFi connected");
+ 
+  // Start the server
+  server.begin();
+  Serial.println("Server started");
+ 
+  // Print the IP address on serial monitor
+  Serial.print("Use this URL to connect: ");
+  Serial.print("http://");    //URL IP to be typed in mobile/desktop browser
+  Serial.print(WiFi.localIP());
+  Serial.println("/");
+ 
+}
+ 
+void loop() {
+  // Check if a client has connected
+  WiFiClient client = server.available();
+  if (!client) {
+    return;
+  }
+ 
+  // Wait until the client sends some data
+  Serial.println("new client");
+  while(!client.available()){
+    delay(1);
+  }
+ 
+  // Read the first line of the request
+  String request = client.readStringUntil('\r');
+  Serial.println(request);
+  client.flush();
+
+ int value = 0;
+
+if (request.indexOf("/Req=0") != -1)  {
+  servo.write(0); 
+  value=0;
+}
+if (request.indexOf("/Req=5") != -1)  {
+  servo.write(5); 
+  value=5;
+}
+if (request.indexOf("/Req=10") != -1)  {
+  servo.write(10); 
+  value=10;
+}
+if (request.indexOf("/Req=15") != -1)  {
+  servo.write(15); 
+  value=15;
+}
+if (request.indexOf("/Req=20") != -1)  {
+  servo.write(20); 
+  value=20;
+}
+if (request.indexOf("/Req=25") != -1)  {
+  servo.write(25); 
+  value=25;
+}
+if (request.indexOf("/Req=30") != -1)  {
+  servo.write(30); 
+  value=30;
+}
+if (request.indexOf("/Req=35") != -1)  {
+  servo.write(35); 
+  value=35;
+}
+if (request.indexOf("/Req=40") != -1)  {
+  servo.write(40); 
+  value=40;
+}
+if (request.indexOf("/Req=45") != -1)  {
+  servo.write(45); 
+  value=45;
+}
+if (request.indexOf("/Req=50") != -1)  {
+  servo.write(50); 
+  value=50;
+}
+if (request.indexOf("/Req=55") != -1)  {
+  servo.write(55); 
+  value=55;
+}
+if (request.indexOf("/Req=60") != -1)  {
+  servo.write(60); 
+  value=60;
+}
+if (request.indexOf("/Req=65") != -1)  {
+  servo.write(65); 
+  value=65;
+}
+if (request.indexOf("/Req=70") != -1)  {
+  servo.write(70); 
+  value=70;
+}
+if (request.indexOf("/Req=75") != -1)  {
+  servo.write(75); 
+  value=75;
+}
+if (request.indexOf("/Req=80") != -1)  {
+  servo.write(80); 
+  value=80;
+}
+if (request.indexOf("/Req=85") != -1)  {
+  servo.write(85); 
+  value=85;
+}
+if (request.indexOf("/Req=90") != -1)  {
+  servo.write(90); 
+  value=90;
+}
+if (request.indexOf("/Req=95") != -1)  {
+  servo.write(95); 
+  value=95;
+}
+if (request.indexOf("/Req=100") != -1)  {
+  servo.write(100); 
+  value=100;
+}
+if (request.indexOf("/Req=105") != -1)  {
+  servo.write(105); 
+  value=105;
+}
+if (request.indexOf("/Req=110") != -1)  {
+  servo.write(110); 
+  value=110;
+}
+if (request.indexOf("/Req=115") != -1)  {
+  servo.write(115); 
+  value=115;
+}
+if (request.indexOf("/Req=120") != -1)  {
+  servo.write(120); 
+  value=120;
+}
+if (request.indexOf("/Req=125") != -1)  {
+  servo.write(125); 
+  value=125;
+}
+if (request.indexOf("/Req=130") != -1)  {
+  servo.write(130); 
+  value=130;
+}
+if (request.indexOf("/Req=135") != -1)  {
+  servo.write(135); 
+  value=135;
+}
+if (request.indexOf("/Req=140") != -1)  {
+  servo.write(140); 
+  value=140;
+}
+if (request.indexOf("/Req=145") != -1)  {
+  servo.write(145); 
+  value=145;
+}
+if (request.indexOf("/Req=150") != -1)  {
+  servo.write(150); 
+  value=150;
+}
+if (request.indexOf("/Req=155") != -1)  {
+  servo.write(155); 
+  value=155;
+}
+if (request.indexOf("/Req=160") != -1)  {
+  servo.write(160); 
+  value=160;
+}
+if (request.indexOf("/Req=165") != -1)  {
+  servo.write(165); 
+  value=165;
+}
+if (request.indexOf("/Req=170") != -1)  {
+  servo.write(170); 
+  value=170;
+}
+if (request.indexOf("/Req=175") != -1)  {  
+  servo.write(175);  
+  value=175;
+}
+if (request.indexOf("/Req=180") != -1)  { 
+  servo.write(179);  
+  value=180;
+}  
+
+  // Return the response
+  client.println("HTTP/1.1 200 OK");
+  client.println("Content-Type: text/html");
+  client.println(""); //  do not forget this one
+  client.println("<!DOCTYPE HTML>");
+  client.println("<html>");
+  client.println("<h1 align=center>Servo motor control over WiFi</h1><br><br>");
+  client.print("Current position  = ");
+  client.print(value); 
+  client.println("<br><br>");
+  client.println("<a href=\"/Req=0\"\"><button>Move to = 0 degree</button></a>");
+  client.println("<a href=\"/Req=90\"\"><button>Move to = 90 degree</button></a>");
+  client.println("<a href=\"/Req=180\"\"><button>Move to = 180 degree</button></a><br/>");
+
+  client.println("</html>");
+  delay(1);
+  Serial.println("Client disonnected");
+  Serial.println("");
+ 
+}
